@@ -174,7 +174,6 @@ html {
 body {
   color: var(--black-100);
 }
-
 /* 헤더 시작 */
 
 .top-bar {
@@ -186,6 +185,7 @@ body {
   height: 8rem;
   border-bottom: 1px solid var(--black-100);
   background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(2rem);
 }
 .top-bar .container {
   width: 100%;
@@ -193,13 +193,32 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: var(--maxwidth);
+  max-width: calc(var(--maxwidth) + 4rem);
   margin: 0 auto;
+  padding: 0 2rem;
+  box-sizing: border-box;
 }
 .top-bar .container .link-box a {
+  position: relative;
   font-size: 2.6rem;
   font-weight: 500;
   letter-spacing: -0.02rem;
+  padding-bottom: 0.6rem;
+}
+.top-bar .container .link-box a::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.15rem;
+  background-color: var(--black-100);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: all 0.3s;
+}
+.top-bar .container .link-box a:hover::before {
+  transform: scaleX(1);
 }
 .top-bar .container .text-box {
   display: flex;
@@ -266,3 +285,280 @@ body {
 }
 
 /* 섹션1 끝 */
+
+/* 디바이더 시작 */
+.divider {
+  overflow-x: hidden;
+  background-color: var(--black-100);
+  display: flex;
+  flex-direction: column;
+  padding: 5rem 0;
+}
+.divider .text-gsap-box-top,
+.text-gsap-box-bottom {
+  display: flex;
+  will-change: transform;
+}
+.divider .text-gsap-box-top p,
+.text-gsap-box-bottom p {
+  color: var(--white-100);
+  font-size: 4.2rem;
+  letter-spacing: 0.5rem;
+  white-space: nowrap;
+  margin-right: 5rem;
+}
+.divider .text-gsap-box-bottom p {
+  margin-top: 3.6rem;
+}
+
+/* 디바이더 끝 */
+
+/* 섹션2 시작 */
+
+.sec-about {
+  padding-top: 12rem;
+}
+.sec-about-grid {
+  max-width: var(--maxwidth);
+  margin: 0 auto;
+}
+.sec-about-grid .title-box h2 {
+  font-family: "Satoshi Bold", sans-serif;
+  font-size: 9.6rem;
+  line-height: 1.5;
+}
+.sec-about-grid .profile-box {
+  display: flex;
+  padding: 12rem 0;
+}
+.sec-about-grid .profile-box .left-box {
+  padding-top: 2rem;
+  max-width: 69.3rem;
+  width: 100%;
+  height: 100%;
+}
+.sec-about-grid .profile-box img {
+  width: 39.5rem;
+  height: 49.8rem;
+  padding-bottom: 2rem;
+}
+.sec-about-grid .profile-box .img-box {
+  width: fit-content;
+  height: fit-content;
+  text-align: center;
+}
+.sec-about-grid .profile-box .img-box span:nth-child(1) {
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-right: 1.6rem;
+}
+.sec-about-grid .profile-box .img-box span:nth-child(2) {
+  font-size: 2.4rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--black-40);
+}
+.sec-about-grid .profile-box .left-box .left-text-box {
+  padding-top: 13.7rem;
+  width: fit-content;
+  height: fit-content;
+}
+.sec-about-grid .profile-box .left-box .left-text-box p {
+  font-size: 2.4rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.02rem;
+  color: var(--black-80);
+}
+
+.sec-about-grid .profile-box .right-box {
+  width: 100%;
+  display: flex;
+  gap: 5.6rem;
+  flex-direction: column;
+}
+.sec-about-grid .profile-box .right-box .con-title-box {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--black-40);
+}
+.sec-about-grid .profile-box .right-box .right-con {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.sec-about-grid .profile-box .right-box .con-title-box h2 {
+  font-size: 3.2rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.sec-about-grid .profile-box .right-box .right-con .con-text-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+.sec-about-grid .profile-box .right-box .right-con .con-1-text-box .con-1-text {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.sec-about-grid .profile-box .right-box .right-con .con-1-text-box .con-1-text span:nth-child(1) {
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+.sec-about-grid .profile-box .right-box .right-con .con-1-text-box .con-1-text span:nth-child(2) {
+  font-size: 2rem;
+  font-weight: 400;
+}
+.sec-about-grid .profile-box .right-box .right-con .con-2-text-box .con-2-text {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.sec-about-grid .profile-box .right-box .right-con .con-2-text-box .con-2-text span:nth-child(1) {
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+.sec-about-grid .profile-box .right-box .right-con .con-2-text-box .con-2-text span {
+  font-size: 2rem;
+  font-weight: 400;
+}
+.sec-about-grid .profile-box .right-box .right-con .con-3-text-box .con-3-text span {
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: -0.02rem;
+}
+.sec-about-grid .profile-box .right-box .right-con .con-4-text-box .con-4-text {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.sec-about-grid .profile-box .right-box .right-con .con-4-text-box .con-4-text span:nth-child(1) {
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+.sec-about-grid .profile-box .right-box .right-con .con-4-text-box .con-4-text span {
+  font-size: 2rem;
+  font-weight: 400;
+}
+/* 섹션 2 끝 */
+
+/* 섹션 4 시작 */
+
+.sec-contact-grid {
+  max-width: var(--maxwidth);
+  margin: 0 auto;
+}
+.sec-contact-grid .title-box {
+  padding-top: 12rem;
+}
+.sec-contact-grid .title-box h2 {
+  font-family: "Satoshi Bold", sans-serif;
+  font-size: 9.6rem;
+  line-height: 1.5;
+}
+.sec-contact-grid .contact-con {
+  display: flex;
+  padding: 12rem 0;
+}
+.sec-contact-grid .contact-con .text-box-1 {
+  width: 100%;
+}
+.sec-contact-grid .contact-con .text-box-1 p {
+  font-size: 2.4rem;
+  font-weight: 500;
+  line-height: 1.8;
+  letter-spacing: -0.02rem;
+}
+.sec-contact-grid .contact-con .text-box-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  min-width: 108.7rem;
+}
+.sec-contact-grid .contact-con .text-box-2 .contact-text-1 span:nth-child(1) {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-right: 2rem;
+}
+.sec-contact-grid .contact-con .text-box-2 .contact-text-1 span:nth-child(2) {
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.sec-contact-grid .contact-con .text-box-2 .contact-text-2 span {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-right: 2rem;
+}
+.sec-contact-grid .contact-con .text-box-2 .contact-text-2 a {
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  padding: 1rem;
+  box-sizing: border-box;
+  border-radius: 1rem;
+  transition: all 0.3s;
+}
+.sec-contact-grid .contact-con .text-box-2 .contact-text-2 a:hover {
+  background-color: var(--black-80);
+  color: var(--white-100);
+}
+.sec-contact-grid .contact-con .text-box-2 .contact-text-2 span {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-right: 2rem;
+}
+.contact-text-1,
+.contact-text-2 {
+  padding-left: 1rem;
+}
+.sec-contact-grid .contact-con .text-box-2 .contact-text-3 a {
+  font-size: 2.2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  padding: 1rem;
+  box-sizing: border-box;
+  border-radius: 1rem;
+  transition: all 0.3s;
+}
+.sec-contact-grid .contact-con .text-box-2 .contact-text-3 a:hover {
+  background-color: var(--black-80);
+  color: var(--white-100);
+}
+/* 섹션 4 끝 */
+
+/* 풋터 시작 */
+
+footer {
+  padding: 8rem 0;
+  background-color: var(--black-80);
+}
+footer .text-box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+footer .text-box p {
+  color: var(--white-80);
+  line-height: 1.5;
+  font-weight: 700;
+  opacity: 0.7;
+  margin: 0 auto;
+}
+footer .text-box p:nth-child(1) {
+  letter-spacing: -0.02rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  opacity: 0.7;
+}
+footer .text-box p:nth-child(2) {
+  font-size: 1.4rem;
+}
+/* 풋터 끝 */
