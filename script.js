@@ -627,40 +627,45 @@ function setupVibeAccordion() {
     return;
   }
 
-  const next = slides[1];
-  const outer = next.querySelector(".vibe-outer");
-  const inner = next.querySelector(".vibe-inner");
-  const background = next.querySelector(".vibe-background");
-  const content = next.querySelector(".vibe-content");
+  const transitionCount = slides.length - 1;
+  const transitionDuration = 0.75;
 
-  gsap.set(next, { autoAlpha: 1, zIndex: 2 });
-  gsap.set(outer, { yPercent: 100 });
-  gsap.set(inner, { yPercent: -100 });
-  gsap.set(background, { yPercent: 15 });
+  slides.forEach((slide, index) => {
+    gsap.set(slide, { autoAlpha: 1, zIndex: index + 1 });
+    slide.classList.toggle("is-interactive", index === 0);
+    if (index === 0) return;
+    gsap.set(slide.querySelector(".vibe-outer"), { yPercent: 100 });
+    gsap.set(slide.querySelector(".vibe-inner"), { yPercent: -100 });
+    gsap.set(slide.querySelector(".vibe-background"), { yPercent: 15 });
+  });
 
   const timeline = gsap.timeline({
+    onUpdate() {
+      const activeIndex = Math.min(transitionCount, Math.floor(this.progress() * transitionCount + 0.5));
+      slides.forEach((slide, index) => {
+        slide.classList.toggle("is-interactive", index === activeIndex);
+      });
+    },
     scrollTrigger: {
       id: "vibe-pin",
       trigger: stage,
       start: "top top",
-      end: "+=120%",
+      end: `+=${120 * transitionCount}%`,
       pin: stage,
       scrub: 1,
       anticipatePin: 1,
       invalidateOnRefresh: true,
-      onUpdate: (self) => {
-        const showNext = self.progress >= 0.5;
-        slides[0].classList.toggle("is-interactive", !showNext);
-        slides[1].classList.toggle("is-interactive", showNext);
-      },
     },
   });
 
-  timeline
-    .to(slides[0].querySelector(".vibe-background"), { yPercent: -15, ease: "none" }, 0)
-    .to([outer, inner], { yPercent: 0, ease: "power1.inOut" }, 0)
-    .to(background, { yPercent: 0, ease: "power1.inOut" }, 0)
-    .fromTo(content, { autoAlpha: 0, y: 80 }, { autoAlpha: 1, y: 0, ease: "power2.out" }, 0.25);
+  slides.slice(1).forEach((next, index) => {
+    const start = index * transitionDuration;
+    timeline
+      .to(slides[index].querySelector(".vibe-background"), { yPercent: -15, duration: 0.5, ease: "none" }, start)
+      .to(next.querySelectorAll(".vibe-outer, .vibe-inner"), { yPercent: 0, duration: 0.5, ease: "power1.inOut" }, start)
+      .to(next.querySelector(".vibe-background"), { yPercent: 0, duration: 0.5, ease: "power1.inOut" }, start)
+      .fromTo(next.querySelector(".vibe-content"), { autoAlpha: 0, y: 80 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: "power2.out" }, start + 0.25);
+  });
 }
 
 /* =========================================================
